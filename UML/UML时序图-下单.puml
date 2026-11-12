@@ -1,0 +1,35 @@
+﻿@startuml
+title 顾客下单时序图
+autonumber
+skinparam shadowing false
+
+actor "顾客" as Customer
+participant "顾客端" as UI
+participant "购物车与下单服务" as OrderService
+participant "菜品与库存服务" as MenuService
+participant "模拟支付" as Pay
+participant "日志与审计服务" as LogService
+database "数据库" as DB
+
+Customer -> UI : 选择地址、提交订单
+UI -> OrderService : placeOrder(requestId, cartId, addressId)
+OrderService -> DB : 按 requestId 查询已有订单
+alt 已存在
+  DB --> OrderService : 原订单
+  OrderService --> UI : 返回原订单（幂等）
+else 新请求
+  OrderService -> MenuService : 检查购物车菜品上架/售罄/价格
+  MenuService --> OrderService : 最新价格和库存
+  alt 校验失败
+    OrderService --> UI : 返回失败原因
+  else 校验通过
+    OrderService -> MenuService : 扣减库存（事务）
+    OrderService -> DB : 保存订单、明细、地址/价格快照
+    OrderService -> Pay : 模拟支付
+    Pay --> OrderService : 支付成功
+    OrderService --> UI : 订单号，状态待接单
+    OrderService -> LogService : 记录下单和库存变更
+  end
+end
+note over OrderService,DB : 订单状态变更与库存扣减在同一事务中
+@enduml

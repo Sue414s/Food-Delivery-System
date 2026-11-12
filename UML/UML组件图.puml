@@ -1,0 +1,79 @@
+﻿@startuml
+title 外卖点餐与配送系统 组件图
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+package "客户端" {
+  [顾客端] as CustomerUI
+  [商家端] as MerchantUI
+  [配送端] as RiderUI
+  [管理端] as AdminUI
+}
+
+package "接入层" {
+  [API 接口层] as API
+}
+
+package "业务服务" {
+  [认证与权限服务] as AuthService
+  [店铺服务] as StoreService
+  [菜品与库存服务] as MenuService
+  [购物车与下单服务] as OrderingService
+  [订单与配送服务] as OrderDeliveryService
+  [退款与售后服务] as RefundService
+  [查询与统计服务] as StatsService
+  [日志与审计服务] as LogService
+}
+
+package "数据层" {
+  [数据访问 Repository] as Repo
+  database "MySQL 数据库" as DB
+  database "文件存储" as FS
+}
+
+[模拟支付] as Pay
+
+CustomerUI --> API
+MerchantUI --> API
+RiderUI --> API
+AdminUI --> API
+
+API --> AuthService
+API --> StoreService
+API --> MenuService
+API --> OrderingService
+API --> OrderDeliveryService
+API --> RefundService
+API --> StatsService
+API --> LogService
+
+OrderingService --> MenuService : 校验/扣减/回补库存
+OrderingService --> OrderDeliveryService : 创建订单/发起配送
+OrderingService --> Pay : 模拟支付
+OrderingService --> RefundService : 发起退款
+RefundService --> OrderingService : 更新订单/回补库存
+OrderDeliveryService ..> RefundService : 退款/补偿
+RefundService ..> OrderDeliveryService : 查询配送状态
+StoreService --> MenuService : 店铺与菜品归属
+StatsService --> Repo
+AuthService --> Repo
+StoreService --> Repo
+MenuService --> Repo
+OrderingService --> Repo
+OrderDeliveryService --> Repo
+RefundService --> Repo
+LogService --> Repo
+MenuService --> FS : 菜品图片
+OrderingService ..> LogService : 写日志
+OrderDeliveryService ..> LogService : 写日志
+RefundService ..> LogService : 写日志
+AuthService ..> LogService : 写日志
+StoreService ..> LogService : 写日志
+MenuService ..> LogService : 写日志
+Repo --> DB
+
+note right of API : 统一鉴权、参数校验、路由
+note bottom of Repo : 各服务通过 Repository 访问数据库
+note bottom of OrderingService : 下单保存价格快照；重复提交返回原订单
+note left of RefundService : 退款按状态计算；已取餐/已送达的配送费归骑手
+@enduml

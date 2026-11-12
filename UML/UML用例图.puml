@@ -1,0 +1,54 @@
+﻿@startuml
+title 外卖点餐与配送系统 用例图
+left to right direction
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+actor "顾客" as Customer
+actor "商家" as Merchant
+actor "配送人员" as Rider
+actor "平台管理员" as Admin
+
+rectangle "外卖点餐与配送系统" {
+  usecase "登录/注册" as UC_Login
+  usecase "浏览/查询菜品" as UC_Browse
+  usecase "管理购物车与地址" as UC_Cart
+  usecase "提交订单" as UC_Order
+  usecase "取消/退款/售后" as UC_Refund
+  usecase "确认收货" as UC_Confirm
+  usecase "查看我的订单" as UC_CustomerOrders
+  usecase "提交入驻申请" as UC_Apply
+  usecase "管理店铺与菜品" as UC_StoreMenu
+  usecase "接单/制作/发起配送" as UC_Fulfill
+  usecase "查看本店订单/统计" as UC_MerchantOrders
+  usecase "抢单/取餐/送达" as UC_Deliver
+  usecase "上报配送失败" as UC_Fail
+  usecase "审核商家与违规处理" as UC_Audit
+  usecase "查看全部订单/统计" as UC_AdminOrders
+  usecase "处理退款纠纷" as UC_Dispute
+  usecase "指派骑手" as UC_Assign
+  usecase "查看操作日志" as UC_Log
+}
+
+Customer --> UC_Login
+Customer --> UC_Browse
+Customer --> UC_Cart
+Customer --> UC_Order
+Customer --> UC_Refund
+Customer --> UC_Confirm
+Customer --> UC_CustomerOrders
+Merchant --> UC_Login
+Merchant --> UC_Apply
+Merchant --> UC_StoreMenu
+Merchant --> UC_Fulfill
+Merchant --> UC_MerchantOrders
+Rider --> UC_Login
+Rider --> UC_Deliver
+Rider --> UC_Fail
+Admin --> UC_Login
+Admin --> UC_Audit
+Admin --> UC_AdminOrders
+Admin --> UC_Dispute
+Admin --> UC_Assign
+Admin --> UC_Log
+@enduml

@@ -1,0 +1,33 @@
+﻿@startuml
+title 订单状态图
+skinparam shadowing false
+hide empty description
+
+state "待接单" as PendingAccept
+state "制作中" as Preparing
+state "待配送" as PendingDelivery
+state "配送中" as Delivering
+state "已送达" as Delivered
+state "已完成" as Completed
+state "已退款" as Refunded
+
+[*] --> PendingAccept : 顾客提交订单/模拟支付
+PendingAccept --> Preparing : 商家接单
+PendingAccept --> Refunded : 顾客取消/商家拒单/10 分钟超时/管理员取消
+Preparing --> PendingDelivery : 商家制作完成
+Preparing --> Refunded : 退款审核通过/管理员取消
+PendingDelivery --> Delivering : 骑手接单/管理员指派
+PendingDelivery --> Refunded : 退款审核通过/管理员取消
+Delivering --> PendingDelivery : 配送失败重派（≤2 次）
+Delivering --> Delivered : 骑手送达
+Delivering --> Refunded : 第 3 次配送失败/退款审核/管理员取消
+Delivered --> Completed : 顾客确认/2 小时自动确认
+Delivered --> Refunded : 售后审核通过
+Completed --> [*]
+Refunded --> [*]
+
+note right of Completed : 终态，禁止退款或转出
+note right of Refunded : 终态，禁止再次退款或恢复
+note bottom of PendingAccept : 禁止跳步到配送中/已送达/已完成
+note bottom of Refunded : 退款金额按状态和骑手是否取餐计算；已取餐/已送达的配送费归骑手
+@enduml

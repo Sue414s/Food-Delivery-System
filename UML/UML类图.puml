@@ -1,0 +1,169 @@
+﻿@startuml
+title 外卖点餐与配送系统 类图
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam packageStyle rectangle
+hide circle
+hide empty members
+
+package "领域实体" {
+  class "用户 User" as User {
+    + phone: String
+    + passwordHash: String
+    + role: Role
+    + status: String
+  }
+
+  enum "角色 Role" as Role {
+    CUSTOMER
+    MERCHANT
+    RIDER
+    ADMIN
+  }
+
+  class "收货地址 Address" as Address {
+    + contactName: String
+    + contactPhone: String
+    + detail: String
+  }
+
+  class "店铺 Store" as Store {
+    + name: String
+    + address: String
+    + phone: String
+    + announcement: String
+    + businessHours: String
+    + status: StoreStatus
+    + deliveryFee: BigDecimal
+  }
+
+  enum "店铺状态 StoreStatus" as StoreStatus {
+    OPEN
+    RESTING
+    BANNED
+  }
+
+  class "菜品分类 Category" as Category {
+    + name: String
+    + sortNo: Integer
+  }
+
+  class "菜品 Dish" as Dish {
+    + name: String
+    + price: BigDecimal
+    + imageUrl: String
+    + description: String
+    + stock: Integer
+    + status: DishStatus
+    + salesCount: Integer
+  }
+
+  enum "菜品状态 DishStatus" as DishStatus {
+    ON_SHELF
+    OFF_SHELF
+  }
+
+  class "购物车 Cart" as Cart {
+    + storeId: Long
+    + updatedAt: DateTime
+  }
+
+  class "购物车项 CartItem" as CartItem {
+    + quantity: Integer
+  }
+
+  class "订单 Order" as Order {
+    + orderNo: String
+    + status: OrderStatus
+    + addressSnapshot: String
+    + remark: String
+    + itemTotal: BigDecimal
+    + deliveryFee: BigDecimal
+    + totalAmount: BigDecimal
+    + createdAt: DateTime
+    + acceptedAt: DateTime
+    + completedAt: DateTime
+  }
+
+  enum "订单状态 OrderStatus" as OrderStatus {
+    PENDING_ACCEPT
+    PREPARING
+    PENDING_DELIVERY
+    DELIVERING
+    DELIVERED
+    COMPLETED
+    REFUNDED
+  }
+
+  class "订单项 OrderItem" as OrderItem {
+    + dishNameSnapshot: String
+    + unitPriceSnapshot: BigDecimal
+    + quantity: Integer
+    + subtotal: BigDecimal
+  }
+
+  class "配送单 DeliveryTask" as DeliveryTask {
+    + status: DeliveryStatus
+    + failureCount: Integer
+    + assignedAt: DateTime
+    + pickedAt: DateTime
+    + deliveredAt: DateTime
+  }
+
+  enum "配送状态 DeliveryStatus" as DeliveryStatus {
+    WAITING
+    ASSIGNED
+    PICKED_UP
+    DELIVERED
+    FAILED
+  }
+
+  class "退款记录 RefundRecord" as RefundRecord {
+    + goodsRefund: BigDecimal
+    + deliveryRefund: BigDecimal
+    + platformDeliveryCost: BigDecimal
+    + riderCompensation: BigDecimal
+    + reason: String
+    + createdAt: DateTime
+  }
+
+  class "操作日志 OperationLog" as OperationLog {
+    + operatorRole: Role
+    + action: String
+    + objectType: String
+    + objectId: Long
+    + beforeValue: String
+    + afterValue: String
+    + reason: String
+    + createdAt: DateTime
+  }
+}
+
+User --> Role : 角色
+Store --> StoreStatus : 状态
+Dish --> DishStatus : 状态
+Order --> OrderStatus : 状态
+DeliveryTask --> DeliveryStatus : 状态
+
+User "1" -- "0..*" Address : 拥有
+User "1" -- "0..*" Order : 下单
+User "1" -- "0..1" Store : 经营
+Cart "0..1" -- "1" User : 属于
+Cart "0..*" -- "1" Store : 所属店铺
+Cart "1" *-- "0..*" CartItem : 包含
+CartItem "0..*" -- "1" Dish : 引用
+Store "1" -- "0..*" Category : 包含
+Category "1" -- "0..*" Dish : 分类
+Store "1" -- "0..*" Dish : 提供
+Order "0..*" -- "1" Store : 属于
+Order "1" *-- "1..*" OrderItem : 包含
+OrderItem "0..*" -- "1" Dish : 引用
+Order "1" -- "0..1" DeliveryTask : 当前配送
+DeliveryTask "0..*" -- "0..1" User : 骑手
+Order "1" -- "0..1" RefundRecord : 退款
+User "1" -- "0..*" OperationLog : 操作
+
+note right of OperationLog : objectType/objectId 可指向订单、店铺、菜品等
+note bottom of Order : 所有实体均包含 id、createdAt、updatedAt 公共字段；状态变更与库存扣减在同一事务中
+note bottom of User : 应用服务类（认证、店铺、菜品、订单、配送、退款、统计、日志）见组件图和时序图
+@enduml

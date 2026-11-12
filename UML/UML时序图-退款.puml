@@ -1,0 +1,36 @@
+﻿@startuml
+title 退款与骑手补偿时序图
+autonumber
+skinparam shadowing false
+
+actor "顾客" as Customer
+participant "顾客端" as UI
+participant "购物车与下单服务" as OrderService
+participant "退款与售后服务" as RefundService
+participant "订单与配送服务" as DeliveryService
+participant "菜品与库存服务" as MenuService
+participant "商家/管理员" as Reviewer
+participant "日志与审计服务" as LogService
+database "数据库" as DB
+
+Customer -> UI : 申请退款/售后
+UI -> OrderService : applyRefund(orderId, reason)
+OrderService -> RefundService : validateRefund(orderId)
+RefundService -> DeliveryService : 查询取餐/送达状态
+DeliveryService --> RefundService : 配送状态
+RefundService -> RefundService : 计算商品退款、配送费退款、平台承担、骑手补偿
+RefundService -> Reviewer : 提交退款审核
+alt 审核通过
+  Reviewer -> RefundService : approve
+  RefundService -> OrderService : markRefunded(orderId)
+  OrderService -> MenuService : 回补库存（未送达）
+  OrderService -> DB : 保存退款记录并更新订单状态
+  RefundService -> DeliveryService : 结算骑手补偿
+  RefundService --> UI : 退款成功
+else 审核驳回
+  Reviewer -> RefundService : reject
+  RefundService --> UI : 驳回原因
+end
+RefundService -> LogService : 记录退款、审核和补偿
+note over RefundService : 只支持整单退款；已完成订单不退款；已取餐/已送达的配送费归骑手
+@enduml
