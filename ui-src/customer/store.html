@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1">
+  <title>店铺菜单</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="customer.css">
+</head>
+<body>
+  <div class="screen">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-icons" aria-hidden="true">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="none">
+          <rect x="0" y="7" width="3" height="4" rx="1" fill="#111827"/>
+          <rect x="4.5" y="5" width="3" height="6" rx="1" fill="#111827"/>
+          <rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="#111827"/>
+          <rect x="13.5" y="0" width="3" height="11" rx="1" fill="#111827"/>
+        </svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+          <path d="M1 4.5C3 2.5 5.3 1.5 8 1.5C10.7 1.5 13 2.5 15 4.5" stroke="#111827" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M3.5 7C4.9 5.7 6.3 5 8 5C9.7 5 11.1 5.7 12.5 7" stroke="#111827" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="8" cy="9.8" r="1.2" fill="#111827"/>
+        </svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+          <rect x="0.5" y="1" width="21" height="10" rx="3" stroke="#111827" stroke-opacity="0.4"/>
+          <rect x="2" y="2.5" width="17" height="7" rx="1.8" fill="#111827"/>
+          <path d="M23 4V8C23.8 7.7 24.3 7 24.3 6C24.3 5 23.8 4.3 23 4Z" fill="#111827" fill-opacity="0.4"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <a class="back-btn" href="home.html" aria-label="返回">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18L9 12L15 6"/>
+        </svg>
+      </a>
+      <div class="nav-title">店铺菜单</div>
+      <div class="nav-action">搜索</div>
+    </div>
+
+    <main class="page no-scroll">
+      <div class="menu-page">
+        <div class="store-hero">
+          <div class="store-logo" style="background: linear-gradient(135deg, #FF9A2E, #FF6B2C);">川</div>
+          <div>
+            <h2>川味小厨</h2>
+            <div class="meta">评分 4.8 · 月售 1200+ · 30 分钟 · 配送费 ¥2</div>
+            <div class="info-line">
+              <span class="tag tag-green">营业中</span>
+              <span>公告：本店满 30 减 5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-body">
+          <aside class="category-list">
+            <div class="category-item active">热销</div>
+            <div class="category-item">主食</div>
+            <div class="category-item">小炒</div>
+            <div class="category-item">饮品</div>
+            <div class="category-item">甜点</div>
+          </aside>
+
+          <section class="dish-list">
+            <h3 class="dish-group-title">热销</h3>
+
+            <div class="dish-item">
+              <div class="dish-img" style="background: linear-gradient(135deg, #FF9A2E, #FF6B2C);">鸡</div>
+              <div class="dish-info">
+                <h4>宫保鸡丁</h4>
+                <p>鸡腿肉、花生、干辣椒，微辣下饭</p>
+                <div class="dish-bottom">
+                  <span class="price">¥22</span>
+                  <button class="add-btn" type="button" aria-label="加入购物车">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dish-item">
+              <div class="dish-img" style="background: linear-gradient(135deg, #F87171, #DC2626);">鱼</div>
+              <div class="dish-info">
+                <h4>鱼香肉丝</h4>
+                <p>里脊肉、木耳、胡萝卜，酸甜微辣</p>
+                <div class="dish-bottom">
+                  <span class="price">¥20</span>
+                  <button class="add-btn" type="button" aria-label="加入购物车">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dish-item">
+              <div class="dish-img sold-out" style="background: linear-gradient(135deg, #A78BFA, #7C3AED);">豆</div>
+              <div class="dish-info">
+                <h4>麻婆豆腐</h4>
+                <p>嫩豆腐、牛肉末、花椒，麻辣鲜香</p>
+                <div class="dish-bottom">
+                  <span class="price">¥16</span>
+                  <button class="add-btn disabled" type="button" aria-label="已售罄" disabled>+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dish-item">
+              <div class="dish-img" style="background: linear-gradient(135deg, #FCD34D, #F59E0B);">饭</div>
+              <div class="dish-info">
+                <h4>米饭</h4>
+                <p>东北大米，软糯香甜</p>
+                <div class="dish-bottom">
+                  <span class="price">¥2</span>
+                  <button class="add-btn" type="button" aria-label="加入购物车">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="cart-bar">
+        <div class="cart-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5H6L8 17H19L21 8H7"/>
+            <circle cx="9" cy="20" r="1.2"/>
+            <circle cx="18" cy="20" r="1.2"/>
+          </svg>
+          <span class="cart-badge">3</span>
+        </div>
+        <div class="total">
+          <div class="amount">¥26</div>
+          <div style="font-size: 10px; color: #D1D5DB;">另需配送费 ¥2</div>
+        </div>
+        <a class="btn-primary" href="cart.html">去结算</a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

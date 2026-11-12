@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1">
+  <title>骑手配送任务</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../customer/customer.css">
+  <style>
+    .rider-tabs {
+      display: flex;
+      gap: 24px;
+      padding: 4px 16px 12px;
+      border-bottom: 1px solid #F3F4F6;
+      background: #FFFFFF;
+    }
+    .rider-tab {
+      position: relative;
+      padding: 8px 0;
+      color: #6B7280;
+      font-size: 13px;
+    }
+    .rider-tab.active {
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+    .rider-tab.active::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      border-radius: 3px 3px 0 0;
+      background: var(--color-primary);
+      content: "";
+    }
+    .rider-page {
+      padding: 12px 16px 80px;
+    }
+    .task-card {
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid #E5E7EB;
+      border-radius: 14px;
+      background: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(17, 24, 39, 0.03);
+    }
+    .task-card.current {
+      border-color: #FFD1A8;
+      background: linear-gradient(180deg, #FFF9F3 0%, #FFFFFF 46%);
+    }
+    .task-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .task-head h3 {
+      margin: 0;
+      color: #1F2937;
+      font-size: 14px;
+    }
+    .route {
+      position: relative;
+      padding-left: 18px;
+    }
+    .route::before {
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      left: 5px;
+      width: 1px;
+      background: #E5E7EB;
+      content: "";
+    }
+    .route-row {
+      position: relative;
+      display: flex;
+      gap: 8px;
+      padding: 4px 0;
+      color: #4B5563;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .route-row::before {
+      position: absolute;
+      top: 9px;
+      left: -17px;
+      width: 9px;
+      height: 9px;
+      border: 2px solid #FFFFFF;
+      border-radius: 50%;
+      background: #FF7A00;
+      box-shadow: 0 0 0 1px #FFD1A8;
+      content: "";
+    }
+    .route-row.destination::before {
+      background: #2563EB;
+      box-shadow: 0 0 0 1px #BFDBFE;
+    }
+    .route-row .label {
+      flex: none;
+      width: 28px;
+      color: #9CA3AF;
+      font-size: 11px;
+    }
+    .task-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #F3F4F6;
+      color: #6B7280;
+      font-size: 11px;
+    }
+    .task-meta .fee {
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .task-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .task-actions .btn-primary {
+      flex: 1;
+      height: 36px;
+      font-size: 13px;
+    }
+    .task-actions .btn-outline {
+      flex: 1;
+      height: 36px;
+      font-size: 12px;
+    }
+    .task-actions .btn-outline.danger {
+      border-color: #FECACA;
+      color: #DC2626;
+      background: #FFF7F7;
+    }
+    .task-note {
+      margin: 4px 0 0;
+      color: #9CA3AF;
+      font-size: 10px;
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 14px 0 8px;
+      color: #1F2937;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .section-label span {
+      color: #9CA3AF;
+      font-size: 11px;
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+  <div class="screen">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-icons" aria-hidden="true">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="none">
+          <rect x="0" y="7" width="3" height="4" rx="1" fill="#111827"/>
+          <rect x="4.5" y="5" width="3" height="6" rx="1" fill="#111827"/>
+          <rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="#111827"/>
+          <rect x="13.5" y="0" width="3" height="11" rx="1" fill="#111827"/>
+        </svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+          <path d="M1 4.5C3 2.5 5.3 1.5 8 1.5C10.7 1.5 13 2.5 15 4.5" stroke="#111827" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M3.5 7C4.9 5.7 6.3 5 8 5C9.7 5 11.1 5.7 12.5 7" stroke="#111827" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="8" cy="9.8" r="1.2" fill="#111827"/>
+        </svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+          <rect x="0.5" y="1" width="21" height="10" rx="3" stroke="#111827" stroke-opacity="0.4"/>
+          <rect x="2" y="2.5" width="17" height="7" rx="1.8" fill="#111827"/>
+          <path d="M23 4V8C23.8 7.7 24.3 7 24.3 6C24.3 5 23.8 4.3 23 4Z" fill="#111827" fill-opacity="0.4"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <div></div>
+      <div class="nav-title">配送任务</div>
+      <div class="nav-action">刷新</div>
+    </div>
+
+    <main class="page">
+      <div class="rider-tabs">
+        <div class="rider-tab active">可抢单</div>
+        <div class="rider-tab">我的配送</div>
+      </div>
+
+      <div class="rider-page">
+        <div class="task-card current">
+          <div class="task-head">
+            <h3>当前配送</h3>
+            <span class="tag tag-blue">配送中</span>
+          </div>
+          <div class="route">
+            <div class="route-row">
+              <span class="label">取餐</span>
+              <span>川味小厨 · XX 大学东门 1 号</span>
+            </div>
+            <div class="route-row destination">
+              <span class="label">送达</span>
+              <span>苏敬烨 · XX 大学 1 号楼 302</span>
+            </div>
+          </div>
+          <div class="task-meta">
+            <span>距离 1.2 km</span>
+            <span>预计 20 分钟</span>
+            <span class="fee">¥2</span>
+          </div>
+          <div class="task-actions">
+            <button class="btn-outline" type="button">已取餐</button>
+            <button class="btn-primary" type="button">送达</button>
+            <button class="btn-outline danger" type="button">上报失败</button>
+          </div>
+          <p class="task-note">未取餐不能点送达；配送失败需填写原因。</p>
+        </div>
+
+        <div class="section-label">
+          可抢单
+          <span>附近 1 单</span>
+        </div>
+
+        <div class="task-card">
+          <div class="task-head">
+            <h3>茶百味</h3>
+            <span class="tag tag-orange">待抢单</span>
+          </div>
+          <div class="route">
+            <div class="route-row">
+              <span class="label">取餐</span>
+              <span>茶百味 · XX 大学东门 3 号</span>
+            </div>
+            <div class="route-row destination">
+              <span class="label">送达</span>
+              <span>李同学 · XX 大学 2 号楼 415</span>
+            </div>
+          </div>
+          <div class="task-meta">
+            <span>距离 0.8 km</span>
+            <span>预计 15 分钟</span>
+            <span class="fee">¥1.5</span>
+          </div>
+          <div class="task-actions">
+            <button class="btn-primary" type="button">抢单</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a class="nav-item active" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7H20V17H4V7Z"/><path d="M8 7V5H16V7"/><path d="M8 17V19H16V17"/>
+        </svg>
+        <span>任务</span>
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19V5M4 19H20"/><path d="M8 15L12 10L16 13L20 7"/>
+        </svg>
+        <span>收入</span>
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="3.5"/>
+          <path d="M5 20C5.5 16.5 8.2 14.5 12 14.5C15.8 14.5 18.5 16.5 19 20"/>
+        </svg>
+        <span>我的</span>
+      </a>
+    </nav>
+  </div>
+</body>
+</html>

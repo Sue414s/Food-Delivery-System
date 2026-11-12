@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1">
+  <title>我的订单</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="customer.css">
+</head>
+<body>
+  <div class="screen">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-icons" aria-hidden="true">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="none">
+          <rect x="0" y="7" width="3" height="4" rx="1" fill="#111827"/>
+          <rect x="4.5" y="5" width="3" height="6" rx="1" fill="#111827"/>
+          <rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="#111827"/>
+          <rect x="13.5" y="0" width="3" height="11" rx="1" fill="#111827"/>
+        </svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+          <path d="M1 4.5C3 2.5 5.3 1.5 8 1.5C10.7 1.5 13 2.5 15 4.5" stroke="#111827" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M3.5 7C4.9 5.7 6.3 5 8 5C9.7 5 11.1 5.7 12.5 7" stroke="#111827" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="8" cy="9.8" r="1.2" fill="#111827"/>
+        </svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+          <rect x="0.5" y="1" width="21" height="10" rx="3" stroke="#111827" stroke-opacity="0.4"/>
+          <rect x="2" y="2.5" width="17" height="7" rx="1.8" fill="#111827"/>
+          <path d="M23 4V8C23.8 7.7 24.3 7 24.3 6C24.3 5 23.8 4.3 23 4Z" fill="#111827" fill-opacity="0.4"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <a class="back-btn" href="home.html" aria-label="返回">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18L9 12L15 6"/>
+        </svg>
+      </a>
+      <div class="nav-title">我的订单</div>
+      <div class="nav-action">筛选</div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">全部</div>
+      <div class="tab">待接单</div>
+      <div class="tab">制作中</div>
+      <div class="tab">配送中</div>
+      <div class="tab">已完成</div>
+    </div>
+
+    <main class="orders-scroll">
+      <div class="orders-page">
+        <div class="order-list">
+          <div class="card order-list-card">
+            <div class="order-head">
+              <h3>川味小厨</h3>
+              <span class="tag tag-orange">待接单</span>
+            </div>
+            <div class="order-items">
+              <div class="order-item-line">
+                <span class="name">宫保鸡丁 x1</span>
+                <span class="price">¥22</span>
+              </div>
+              <div class="order-item-line">
+                <span class="name">米饭 x2</span>
+                <span class="price">¥4</span>
+              </div>
+            </div>
+            <div class="order-foot">
+              <span class="total">合计 <strong>¥28</strong></span>
+              <div class="order-actions">
+                <button class="btn-outline" type="button">取消订单</button>
+                <button class="btn-outline" type="button">联系商家</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card order-list-card">
+            <div class="order-head">
+              <h3>茶百味</h3>
+              <span class="tag tag-blue">配送中</span>
+            </div>
+            <div class="order-items">
+              <div class="order-item-line">
+                <span class="name">杨枝甘露 x1</span>
+                <span class="price">¥18</span>
+              </div>
+            </div>
+            <div class="order-foot">
+              <span class="total">合计 <strong>¥18</strong></span>
+              <div class="order-actions">
+                <button class="btn-outline" type="button">查看配送</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a class="nav-item" href="home.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 10.5L12 3L21 10.5V20H14V14H10V20H3V10.5Z"/>
+        </svg>
+        <span>首页</span>
+      </a>
+      <a class="nav-item active" href="orders.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="3" width="14" height="18" rx="2"/>
+          <path d="M8 8H16M8 12H16M8 16H13"/>
+        </svg>
+        <span>订单</span>
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="3.5"/>
+          <path d="M5 20C5.5 16.5 8.2 14.5 12 14.5C15.8 14.5 18.5 16.5 19 20"/>
+        </svg>
+        <span>我的</span>
+      </a>
+    </nav>
+  </div>
+</body>
+</html>

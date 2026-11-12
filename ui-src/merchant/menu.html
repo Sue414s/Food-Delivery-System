@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1">
+  <title>商家菜品与店铺</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../pc.css">
+</head>
+<body>
+  <div class="screen">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">商</div>
+        外卖商家
+      </div>
+      <nav class="side-nav">
+        <a class="side-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/>
+          </svg>
+          工作台
+        </a>
+        <a class="side-item" href="orders.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8H16M8 12H16M8 16H13"/>
+          </svg>
+          订单管理
+        </a>
+        <a class="side-item active" href="menu.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5H20M4 12H20M4 19H14"/>
+          </svg>
+          菜品管理
+        </a>
+        <a class="side-item" href="menu.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 10L12 3L20 10V21H4V10Z"/><path d="M9 21V14H15V21"/>
+          </svg>
+          店铺设置
+        </a>
+        <a class="side-item" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 20V10M10 20V4M16 20V13M22 20V7"/>
+          </svg>
+          统计报表
+        </a>
+      </nav>
+      <div class="side-bottom">
+        川味小厨<br>
+        <span style="color:#4ADE80;">营业中</span>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <h1>菜品与店铺</h1>
+        <div class="top-actions">
+          <span>2026-10-31 12:20</span>
+          <div class="avatar">川</div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="two-col wide-left">
+          <section class="panel">
+            <div class="panel-head">
+              <h2>菜品管理</h2>
+              <button class="btn primary" type="button">+ 新增菜品</button>
+            </div>
+            <div class="tabs">
+              <div class="tab active">热销</div>
+              <div class="tab">主食</div>
+              <div class="tab">小炒</div>
+              <div class="tab">饮品</div>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 32%;">菜品</th>
+                  <th style="width: 14%;">分类</th>
+                  <th style="width: 12%;">价格</th>
+                  <th style="width: 12%;">库存</th>
+                  <th style="width: 12%;">状态</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="dish-cell">
+                      <div class="dish-thumb" style="background: linear-gradient(135deg, #FF9A2E, #FF6B2C);">鸡</div>
+                      <div>
+                        <div class="strong">宫保鸡丁</div>
+                        <div class="muted">鸡腿肉、花生、干辣椒</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>热销</td>
+                  <td class="strong">¥22</td>
+                  <td>50</td>
+                  <td><span class="tag tag-green">已上架</span></td>
+                  <td>
+                    <button class="btn" type="button">编辑</button>
+                    <button class="btn" type="button">下架</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dish-cell">
+                      <div class="dish-thumb" style="background: linear-gradient(135deg, #F87171, #DC2626);">鱼</div>
+                      <div>
+                        <div class="strong">鱼香肉丝</div>
+                        <div class="muted">里脊肉、木耳、胡萝卜</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>小炒</td>
+                  <td class="strong">¥20</td>
+                  <td>30</td>
+                  <td><span class="tag tag-green">已上架</span></td>
+                  <td>
+                    <button class="btn" type="button">编辑</button>
+                    <button class="btn" type="button">下架</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dish-cell">
+                      <div class="dish-thumb" style="background: linear-gradient(135deg, #A78BFA, #7C3AED);">豆</div>
+                      <div>
+                        <div class="strong">麻婆豆腐</div>
+                        <div class="muted">嫩豆腐、牛肉末、花椒</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>小炒</td>
+                  <td class="strong">¥16</td>
+                  <td>0</td>
+                  <td><span class="tag tag-red">已售罄</span></td>
+                  <td>
+                    <button class="btn" type="button">编辑</button>
+                    <button class="btn ghost" type="button">补货</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dish-cell">
+                      <div class="dish-thumb" style="background: linear-gradient(135deg, #FCD34D, #F59E0B);">饭</div>
+                      <div>
+                        <div class="strong">米饭</div>
+                        <div class="muted">东北大米</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>主食</td>
+                  <td class="strong">¥2</td>
+                  <td>100</td>
+                  <td><span class="tag tag-green">已上架</span></td>
+                  <td>
+                    <button class="btn" type="button">编辑</button>
+                    <button class="btn" type="button">下架</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dish-cell">
+                      <div class="dish-thumb" style="background: linear-gradient(135deg, #34D399, #0E9F6E);">饮</div>
+                      <div>
+                        <div class="strong">酸梅汤</div>
+                        <div class="muted">冰镇酸梅汤</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>饮品</td>
+                  <td class="strong">¥6</td>
+                  <td>20</td>
+                  <td><span class="tag tag-green">已上架</span></td>
+                  <td>
+                    <button class="btn" type="button">编辑</button>
+                    <button class="btn" type="button">下架</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="panel store-panel">
+            <h2>店铺设置</h2>
+            <div class="status-toggle">
+              <span>营业状态：<span class="state">营业中</span></span>
+              <span class="switch" aria-label="营业中"></span>
+            </div>
+            <div class="form-row">
+              <label>店铺名称</label>
+              <input type="text" value="川味小厨">
+            </div>
+            <div class="form-row">
+              <label>店铺地址</label>
+              <input type="text" value="XX 大学东门 1 号">
+            </div>
+            <div class="form-row">
+              <label>联系电话</label>
+              <input type="text" value="138****8000">
+            </div>
+            <div class="form-row">
+              <label>配送费（元）</label>
+              <input type="text" value="2">
+            </div>
+            <div class="form-row">
+              <label>店铺公告</label>
+              <textarea>本店满 30 减 5，欢迎下单。</textarea>
+            </div>
+            <button class="btn primary" type="button" style="width: 100%; height: 34px;">保存店铺设置</button>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

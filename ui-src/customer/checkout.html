@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1">
+  <title>确认订单</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="customer.css">
+</head>
+<body>
+  <div class="screen">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-icons" aria-hidden="true">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="none">
+          <rect x="0" y="7" width="3" height="4" rx="1" fill="#111827"/>
+          <rect x="4.5" y="5" width="3" height="6" rx="1" fill="#111827"/>
+          <rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="#111827"/>
+          <rect x="13.5" y="0" width="3" height="11" rx="1" fill="#111827"/>
+        </svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+          <path d="M1 4.5C3 2.5 5.3 1.5 8 1.5C10.7 1.5 13 2.5 15 4.5" stroke="#111827" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M3.5 7C4.9 5.7 6.3 5 8 5C9.7 5 11.1 5.7 12.5 7" stroke="#111827" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="8" cy="9.8" r="1.2" fill="#111827"/>
+        </svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+          <rect x="0.5" y="1" width="21" height="10" rx="3" stroke="#111827" stroke-opacity="0.4"/>
+          <rect x="2" y="2.5" width="17" height="7" rx="1.8" fill="#111827"/>
+          <path d="M23 4V8C23.8 7.7 24.3 7 24.3 6C24.3 5 23.8 4.3 23 4Z" fill="#111827" fill-opacity="0.4"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <a class="back-btn" href="cart.html" aria-label="返回">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18L9 12L15 6"/>
+        </svg>
+      </a>
+      <div class="nav-title">确认订单</div>
+      <div></div>
+    </div>
+
+    <main class="page">
+      <div class="checkout-page">
+        <div class="card address-card">
+          <div class="address-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21S5 14.5 5 9.5C5 5.9 8.1 3 12 3C15.9 3 19 5.9 19 9.5C19 14.5 12 21 12 21Z"/>
+              <circle cx="12" cy="9.5" r="2.2"/>
+            </svg>
+          </div>
+          <div class="address-info">
+            <h3>苏敬烨 <span>138****8000</span></h3>
+            <p>XX 大学 1 号楼 302 室</p>
+          </div>
+          <div class="address-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18L15 12L9 6"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="card order-card">
+          <div class="order-card-head">
+            <h3>川味小厨</h3>
+            <span>预计 30 分钟送达</span>
+          </div>
+          <div class="checkout-item">
+            <span class="name">宫保鸡丁</span>
+            <span class="qty">x1</span>
+            <span class="price">¥22</span>
+          </div>
+          <div class="checkout-item">
+            <span class="name">米饭</span>
+            <span class="qty">x2</span>
+            <span class="price">¥4</span>
+          </div>
+          <div class="divider"></div>
+          <div class="summary-line">
+            <span>商品小计</span>
+            <strong>¥26</strong>
+          </div>
+          <div class="summary-line total">
+            <span>合计</span>
+            <strong>¥28</strong>
+          </div>
+        </div>
+
+        <div class="card info-card">
+          <div class="info-line">
+            <span class="label">配送费</span>
+            <span class="value">¥2</span>
+          </div>
+          <div class="info-line">
+            <span class="label">备注</span>
+            <input type="text" placeholder="少辣，不要香菜">
+          </div>
+        </div>
+
+        <p class="pay-note">模拟支付：提交订单即视为支付成功，不接入真实支付。</p>
+      </div>
+    </main>
+
+    <div class="bottom-bar">
+      <div>
+        <div class="total">合计</div>
+        <div class="amount"><small>¥</small>28</div>
+      </div>
+      <a class="btn-primary" href="orders.html">提交订单</a>
+    </div>
+  </div>
+</body>
+</html>
